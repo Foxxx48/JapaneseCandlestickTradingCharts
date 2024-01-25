@@ -31,6 +31,9 @@ fun Terminal(bars: List<Bar>) {
     var barWidth by remember {
         mutableStateOf(0f)
     }
+    var terminalWidth by remember {
+        mutableStateOf(0f)
+    }
 
 
     val transformableState = TransformableState { zoomChange, panChange, _ ->
@@ -39,7 +42,7 @@ fun Terminal(bars: List<Bar>) {
 
         scrolledBy = (scrolledBy + panChange.x)
             .coerceAtLeast(0f)
-            .coerceAtMost(bars.size * barWidth)
+            .coerceAtMost(bars.size * barWidth - terminalWidth)
     }
 
     Canvas(
@@ -48,6 +51,7 @@ fun Terminal(bars: List<Bar>) {
             .background(Color.Black)
             .transformable(transformableState)
     ) {
+        terminalWidth = size.width
         val max = bars.maxOf { it.high }
         val min = bars.minOf { it.low }
         val pxPerPoint = size.height / (max - min)
