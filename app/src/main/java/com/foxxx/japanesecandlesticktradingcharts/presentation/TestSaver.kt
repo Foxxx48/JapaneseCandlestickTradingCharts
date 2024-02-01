@@ -2,7 +2,9 @@ package com.foxxx.japanesecandlesticktradingcharts.presentation
 
 import android.os.Parcelable
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,14 +29,47 @@ fun Test() {
         mutableStateOf(TestData(0))
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .clickable { testData1 = testData1.copy(number = testData1.number + 1) },
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Text: $testData1")
+    var number by rememberSaveable {
+        mutableStateOf(0)
     }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+
+    ) {
+
+        Box(
+            modifier = Modifier
+
+                .clickable { testData = testData.copy(number = testData.number + 1) },
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "TextData: $testData")
+        }
+
+        Box(
+            modifier = Modifier
+
+                .clickable { testData1 = testData1.copy(number = testData1.number + 1) },
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "TextData1: $testData1")
+        }
+
+        Box(
+            modifier = Modifier
+
+                .clickable { number++},
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "Number: $number")
+        }
+    }
+
+
 }
 
 data class TestData1(val number: Int, val text: String) {

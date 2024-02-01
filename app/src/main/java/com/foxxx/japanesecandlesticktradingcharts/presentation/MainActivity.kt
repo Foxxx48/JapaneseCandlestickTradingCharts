@@ -15,6 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JapaneseCandlestickTradingChartsTheme {
+
                 val viewModel: TerminalViewModel = viewModel()
                 val screenState = viewModel.state.collectAsState()
 
