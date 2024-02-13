@@ -21,7 +21,6 @@ class TerminalViewModel : ViewModel() {
         _state.value = lastState
     }
 
-
     init {
         loadBarList()
     }
